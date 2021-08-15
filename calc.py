@@ -7,17 +7,10 @@ window.geometry('375x667')
 window.resizable(0, 0)
 window.title('Calculator')
 
+display_frame = tk.Frame(window, bg=GRAY, height=221)
+display_frame.pack(expand=True, fill='both')
 
-def display_frame():
-    frame = tk.Frame(window, bg=GRAY, height=221)
-    frame.pack(expand=True, fill='both')
+button_frame = tk.Frame(window)
+button_frame.pack(expand=True, fill='both')
 
-
-def button_frame():
-    frame = tk.Frame(window)
-    frame.pack(expand=True, fill='both')
-
-
-display_frame()
-button_frame()
 window.mainloop()
