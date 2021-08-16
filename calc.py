@@ -42,7 +42,7 @@ operations = {"/": "\u00F7", "*": "\u00D7", "-": "-", "+": "+"}
 
 
 def update_label():
-    display_label.config(text=current_expression)
+    display_label.config(text=current_expression[:11])
 
 
 def update_total_label():
@@ -73,10 +73,13 @@ def evaluate():
     global total_expression
     total_expression += current_expression
     update_total_label()
-
-    current_expression = str(eval(total_expression))
-    total_expression = ''
-    update_label()
+    try:
+        current_expression = str(eval(total_expression))
+        total_expression = ''
+    except Exception as e:
+        current_expression = 'Error'
+    finally:
+        update_label()
 
 
 def clear():
