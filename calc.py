@@ -46,7 +46,10 @@ def update_label():
 
 
 def update_total_label():
-    display_total_label.config(text=total_expression)
+    expression = total_expression
+    for operator, symbol in operations.items():
+        expression = expression.replace(operator, f' {symbol} ')
+    display_total_label.config(text=expression)
 
 
 def add_to_expression(value):
