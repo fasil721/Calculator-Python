@@ -1,14 +1,15 @@
 import tkinter as tk
 
-LABEL_COLOR = "#25265E"
-GRAY = '#F0EAEA'
-OFF_WHITE = "#F8FAFF"
+LABEL_COLOR = "#000000"
+GRAY = '#1A1717'
+OFF_WHITE = "#1B1C1A"
+GREEN = "#51A925"
 WHITE = "#FFFFFF"
-LIGHT_BLUE = "#CCEDFF"
 LARGE_FONT_STYLE = ("Arial", 35, "bold")
 SMALL_FONT_STYLE = ("Arial", 15)
 DIGITS_FONT_STYLE = ("Arial", 20, "bold")
 DEFAULT_FONT_STYLE = ("Arial", 20)
+FONT_STYLE = ("Arial", 16)
 
 window = tk.Tk()
 window.geometry('325x475')
@@ -25,11 +26,11 @@ total_expression = ''
 current_expression = ''
 
 display_total_label = tk.Label(display_frame, text=total_expression, anchor=tk.E, bg=GRAY,
-                               fg=LABEL_COLOR, padx=24, font=SMALL_FONT_STYLE)
+                               fg=WHITE, padx=24, font=SMALL_FONT_STYLE)
 display_total_label.pack(expand=True, fill='both')
 
 display_label = tk.Label(display_frame, text=current_expression, anchor=tk.E, bg=GRAY,
-                         fg=LABEL_COLOR, padx=24, font=LARGE_FONT_STYLE)
+                         fg=WHITE, padx=24, font=LARGE_FONT_STYLE)
 display_label.pack(expand=True, fill='both')
 
 digits = {
@@ -115,12 +116,12 @@ def bind_key():
 
 
 for digit, grid_value in digits.items():
-    button = tk.Button(button_frame, text=digit, bg=WHITE, fg=LABEL_COLOR, font=DIGITS_FONT_STYLE,
+    button = tk.Button(button_frame, text=digit, bg=LABEL_COLOR, fg=WHITE, font=DIGITS_FONT_STYLE,
                        borderwidth=0, command=lambda n=digit: add_to_expression(n))
     button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 i = 0
 for operator, symbol in operations.items():
-    button = tk.Button(button_frame, text=symbol, bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+    button = tk.Button(button_frame, text=symbol, bg=OFF_WHITE, fg=WHITE, font=DEFAULT_FONT_STYLE,
                        borderwidth=0, command=lambda o=operator: append_operator(o))
     button.grid(row=i, column=4, sticky=tk.NSEW)
     i += 1
@@ -129,15 +130,18 @@ for x in range(1, 5):
     button_frame.columnconfigure(x, weight=1)
     bind_key()
 
-clear_button = tk.Button(button_frame, text="C", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+clear_button = tk.Button(button_frame, text="C", height=2, bg=OFF_WHITE, fg=WHITE, font=FONT_STYLE,
                          borderwidth=0, command=clear)
-clear_button.grid(row=0, column=1, columnspan=2, sticky=tk.NSEW)
+clear_button.grid(row=0, column=1, sticky=tk.NSEW)
+percentage_button = tk.Button(button_frame, text="%", bg=OFF_WHITE, fg=WHITE, font=FONT_STYLE,
+                              borderwidth=0)
+percentage_button.grid(row=0, column=3, sticky=tk.NSEW)
 
-delete_button = tk.Button(button_frame, text="\u232B", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+delete_button = tk.Button(button_frame, text="\u232B", bg=OFF_WHITE, fg=WHITE, font=FONT_STYLE,
                           borderwidth=0, command=delete)
-delete_button.grid(row=0, column=3, sticky=tk.NSEW)
+delete_button.grid(row=0, column=2, sticky=tk.NSEW)
 
-equal_button = tk.Button(button_frame, text='=', bg=LIGHT_BLUE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+equal_button = tk.Button(button_frame, text='=', fg='black', bg=GREEN, font=DEFAULT_FONT_STYLE,
                          borderwidth=0, command=evaluate)
 equal_button.grid(row=4, column=3, columnspan=2, sticky=tk.NSEW)
 
