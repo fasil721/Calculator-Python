@@ -105,6 +105,15 @@ def delete():
         update_label()
 
 
+def bind_key():
+    window.bind("<Return>", lambda event: evaluate())
+    for key in digits:
+        window.bind(str(key), lambda event, digit=key: add_to_expression(digit))
+
+    for key in operations:
+        window.bind(key, lambda event, operator=key: append_operator(operator))
+
+
 for digit, grid_value in digits.items():
     button = tk.Button(button_frame, text=digit, bg=WHITE, fg=LABEL_COLOR, font=DIGITS_FONT_STYLE,
                        borderwidth=0, command=lambda n=digit: add_to_expression(n))
@@ -118,6 +127,7 @@ for operator, symbol in operations.items():
 for x in range(1, 5):
     button_frame.rowconfigure(x, weight=1)
     button_frame.columnconfigure(x, weight=1)
+    bind_key()
 
 clear_button = tk.Button(button_frame, text="C", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                          borderwidth=0, command=clear)
